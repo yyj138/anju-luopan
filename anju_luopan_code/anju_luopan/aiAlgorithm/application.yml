@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: ai-agent
+
+server:
+  port: 8081
+
+ai:
+  api:
+    url: https://api.deepseek.com/v1/chat/completions
+    key: sk-d4deb228fcbb4b8da30932196fa29c99
+    model: deepseek-chat
+
+image-group:
+  url: http://8.134.109.200:8080
+  analyze-path: /api/analyze
+
+commute-service:
+  url: http://8.134.109.200:5001
+  commute-path: /api/commute

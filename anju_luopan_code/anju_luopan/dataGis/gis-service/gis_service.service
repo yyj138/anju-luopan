@@ -1,0 +1,13 @@
+[Unit]
+Description=GIS Service for Anju Luopan
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/gis_service
+Environment="PATH=/opt/gis_service/venv/bin"
+ExecStart=/opt/gis_service/venv/bin/uvicorn app:app --host 0.0.0.0 --port 8080
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

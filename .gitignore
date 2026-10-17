@@ -22,3 +22,16 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+**/target/
+**/.idea/
+**/__pycache__/
+**/*.pyc
+**/*.log
+**/.env
+**/node_modules/
+**/dist/
+**/*.pth
+**/*.pt
+anju_luopan_code/anju_luopan/frontVue/house-images/*.jpg
+anju_luopan_code/anju_luopan/dataGis/crawler/msedgedriver.exe

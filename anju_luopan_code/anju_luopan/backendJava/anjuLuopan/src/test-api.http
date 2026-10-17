@@ -1,0 +1,25 @@
+### ========== JWT 认证测试 ==========
+
+### 1. 用户登录（获取 token）- 已完成 ✅
+POST http://localhost:8080/user/login
+Content-Type: application/x-www-form-urlencoded
+
+username=张三&password=123456
+
+### 2. 获取用户信息（需要 token）
+GET http://localhost:8080/user/info/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoi5byg5LiJIiwiaWF0IjoxNzc0MzQxNTM5LCJleHAiOjE3NzQ5NDYzMzl9.Zjpu6sP1pmfFP1ebcTH4RMzGkdNoJmo9jfaZAT2qqMA
+
+### 3. 搜索房源（需要 token）
+POST http://localhost:8080/house/search
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoi5byg5LiJIiwiaWF0IjoxNzc0MzQxNTM5LCJleHAiOjE3NzQ5NDYzMzl9.Zjpu6sP1pmfFP1ebcTH4RMzGkdNoJmo9jfaZAT2qqMA
+Content-Type: application/json
+
+{
+  "minPrice": 4000,
+  "maxPrice": 6000
+}
+
+### 4. 记录浏览（需要 token）
+POST http://localhost:8080/house/view/1?userId=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoi5byg5LiJIiwiaWF0IjoxNzc0MzQxNTM5LCJleHAiOjE3NzQ5NDYzMzl9.Zjpu6sP1pmfFP1ebcTH4RMzGkdNoJmo9jfaZAT2qqMA

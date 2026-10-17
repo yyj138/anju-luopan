@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ai-agent
+
+server:
+  port: 8081
+
+ai:
+  api:
+    url: https://api.deepseek.com/v1/chat/completions
+    key: ${DEEPSEEK_API_KEY:} #这里需要配置你的deepseek的api key
+    model: deepseek-chat
+
+# p图检测服务器
+image-group:
+  url: http://8.134.109.200:8080
+  analyze-path: /api/analyze
+
+#空间分析服务器
+commute-service:
+  url: http://8.134.109.200:5001
+  commute-path: /api/commute
