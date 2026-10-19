@@ -27,6 +27,7 @@
 ## 系统架构
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "14px"}}}%%
 graph TD
     FE[前端应用<br/>Vue 3 + ECharts]
     BE[后端服务<br/>Spring Boot 3.1.12]
