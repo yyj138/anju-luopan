@@ -1,37 +1,38 @@
-# anju_luopan
+# 安居·罗盘 - 数据采集与 GIS
 
-#### 介绍
-安居-罗盘租房风控平台
+安居·罗盘的数据支撑模块，负责房源数据采集、GIS 地理空间分析及相关文档，为后端风控评估与前端可视化提供数据基础。
 
-#### 软件架构
-软件架构说明
+## 子模块
 
+| 子模块 | 目录 | 说明 |
+| ---- | ---- | ---- |
+| 数据爬虫 | `crawler/` | 采集安居客等平台的房源数据（`anjuke_spider.py`） |
+| GIS 服务 | `gis-service/` | 地理空间分析接口（FastAPI + PostGIS），详见其 README |
+| 数据 | `data/` | 原始数据与处理结果 |
+| 文档 | `docs/` | GIS 接口文档等（`GIS-API.md`） |
 
-#### 安装教程
+## 技术栈
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+- Python 3.6+
+- FastAPI / uvicorn
+- PostgreSQL + PostGIS
+- psycopg2
 
-#### 使用说明
+## 快速开始
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 数据爬虫
 
-#### 参与贡献
+```bash
+cd data-gis/crawler
+python anjuke_spider.py
+```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+### GIS 服务
 
+```bash
+cd data-gis/gis-service
+pip install -r requirements.txt
+python app.py
+```
 
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+GIS 服务环境配置参考 `gis-service/.env.example`，详细说明见 `gis-service/README.md`。

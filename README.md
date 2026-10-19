@@ -79,7 +79,7 @@ graph TD
 | 层 | 技术 |
 | ---- | ---- |
 | 前端 | Vue 3（CDN 引入）、Vue Router、ECharts 5、Font Awesome |
-| 后端 | Spring Boot 3.1.12、Java 17、MyBatis-Plus 3.5.5、MySQL 8.0、PostgreSQL、JWT |
+| 后端 | Spring Boot 3.1.12、Java 17、MyBatis-Plus 3.5.5、PostgreSQL（默认）、MySQL 8.0、JWT |
 | AI 服务 | Spring Boot 3.1.12、Java 17、DeepSeek API（HTTP） |
 | 视觉算法 | Python 3.9+、PyTorch 2.0+、EfficientNet / ResNet / Xception、Tesseract OCR |
 | 数据与 GIS | Python、Flask、GIS 通勤圈计算 |
@@ -91,13 +91,13 @@ graph TD
 
 - JDK 17 或更高版本
 - Maven 3.6 或更高版本
-- MySQL 8.0（或 PostgreSQL）
+- PostgreSQL（默认）或 MySQL 8.0
 - Python 3.9 或更高版本
 - 可选：支持 CUDA 的 NVIDIA GPU（视觉模型训练）
 
 ### 1. 初始化数据库
 
-将 `database/` 目录下的 SQL 脚本导入 MySQL，并确保各服务配置的数据库连接信息正确。
+后端默认使用 PostgreSQL。`database/` 目录提供 MySQL 初始化脚本，可按需导入，并同步修改各服务配置中的数据库连接信息。
 
 ### 2. 启动后端服务（backend）
 
@@ -106,7 +106,7 @@ cd backend
 mvn spring-boot:run
 ```
 
-配置位于 `backend/src/main/resources/application.yml`，默认服务端口 8080。
+配置位于 `backend/src/main/resources/application.yml`，默认服务端口 8082。
 
 ### 3. 启动 AI 智能体（ai-algorithm/ai-agent）
 
@@ -165,10 +165,10 @@ cd frontend
 
 | 接口 | 方法 | 说明 |
 | ---- | ---- | ---- |
-| `/ai/chat` | POST | 租房咨询对话 |
-| `/ai/analyze` | POST | 房源综合评估 |
-| `/ai/recommend` | POST | 个性化推荐 |
-| `/ai/report` | POST | 风险报告生成 |
+| `/ai/chat` | POST | AI 租房咨询对话 |
+| `/ai/analyze-chat` | POST | 聊天记录分析（反诈检测） |
+| `/ai/generate-report` | POST | 综合报告生成 |
+| `/ai/health` | GET | 健康检查 |
 
 ### 视觉算法（ai-algorithm/vision）
 

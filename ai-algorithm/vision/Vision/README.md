@@ -1,12 +1,18 @@
-- **多模型架构支持**：集成EfficientNet、ResNet、Xception等前沿深度学习模型
-- **现代化Web界面**：基于Bootstrap 5.3.2构建的响应式用户界面
-- **综合图像评估**：支持OCR文本提取、家具检测、盗图相似度检查等功能
-- **多任务学习**：支持伪造检测、AI生成识别等多任务联合训练
+# 安居·罗盘 - 视觉算法模块
+
+基于深度学习的房源图片综合评估服务，支持 OCR 文本提取、家具检测、盗图相似度检查、房间质量评估与伪造/AI 生成识别。
+
+## 核心特性
+
+- **多模型架构支持**：集成 EfficientNet、ResNet、Xception 等前沿深度学习模型
+- **现代化 Web 界面**：基于 Bootstrap 5.3.2 构建的响应式用户界面
+- **综合图像评估**：支持 OCR 文本提取、家具检测、盗图相似度检查等功能
+- **多任务学习**：支持伪造检测、AI 生成识别等多任务联合训练
 
 ##  项目架构
 
 ```
-VerifyVision-Pro/
+Vision/
 │
 ├── src/                           # 源代码
 │   ├── data_utils/                # 数据处理工具
@@ -65,7 +71,7 @@ conda activate vvpro
 
 ### 步骤2：安装依赖
 ```bash
-cd /d D:\Users\iwant\Desktop\Vision
+cd ai-algorithm/vision/Vision
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 

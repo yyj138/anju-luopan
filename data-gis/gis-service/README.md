@@ -19,4 +19,4 @@
 1. 克隆代码到服务器：
    ```bash
    git clone <repository_url>
-   cd anju_luopan/gis-service
+   cd data-gis/gis-service
