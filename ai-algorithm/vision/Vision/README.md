@@ -3,7 +3,7 @@
 - **综合图像评估**：支持OCR文本提取、家具检测、盗图相似度检查等功能
 - **多任务学习**：支持伪造检测、AI生成识别等多任务联合训练
 
-## 📁 项目架构
+##  项目架构
 
 ```
 VerifyVision-Pro/
@@ -55,7 +55,7 @@ VerifyVision-Pro/
 - **内存**: 16GB
 - **操作系统**: Windows、Ubuntu 20.04+或macOS 12+
 
-## 📦 安装
+##  安装
 
 ### 步骤1：创建Python环境
 ```bash
@@ -72,7 +72,7 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ### 步骤3：安装OCR引擎（可选）
 - 下载并安装 tesseract: https://github.com/UB-Mannheim/tesseract/wiki
 
-## 🚀 快速开始
+##  快速开始
 
 ### 步骤1：生成测试数据
 ```bash
@@ -103,7 +103,7 @@ python main.py web --model-path models/saved/best_model.pth --model-name efficie
 ### 步骤5：访问应用
 打开浏览器访问[http://localhost:8080](http://localhost:8080)即可使用系统。
 
-## 🔨 常见问题解决
+##  常见问题解决
 
 ### 端口占用问题
 ```bash
@@ -115,7 +115,7 @@ set FLASK_RUN_PORT=8080 && python main.py
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-## 📝 注意事项
+##  注意事项
 
 - 确保Python 3.9+环境
 - 使用`pip install -r requirements.txt`安装所有依赖
