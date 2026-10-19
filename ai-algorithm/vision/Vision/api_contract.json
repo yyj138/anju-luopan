@@ -1,0 +1,171 @@
+{
+  "contractVersion": "1.0",
+  "service": "VerifyVision-Pro",
+  "endpoints": [
+    {
+      "name": "Unified Analyze",
+      "method": "POST",
+      "path": "/api/analyze",
+      "contentType": "multipart/form-data",
+      "request": {
+        "formFields": [
+          {
+            "name": "file",
+            "type": "file",
+            "required": true,
+            "allowedExtensions": ["jpg", "jpeg", "png"],
+            "description": "房源图片文件"
+          },
+          {
+            "name": "fields",
+            "type": "string",
+            "required": false,
+            "description": "可选：逗号分隔字段列表，如 fields=p_image,ocr,room_quality；未提供则默认返回/计算全部能力。"
+          }
+        ]
+      },
+      "response": {
+        "success": {
+          "httpStatus": 200,
+          "bodyExample": {
+            "p_image": { "label": "伪造", "prob": 73.21 },
+            "ai_generated": { "status": "unavailable" },
+            "piracy": {
+              "status": "unavailable",
+              "is_infringing": false,
+              "match_count": 0,
+              "top_results": []
+            },
+            "room_quality": {
+              "tier": "medium",
+              "scores": { "overall": 55, "decor": 55, "safety": 55 },
+              "cheap_decor_risk": "medium",
+              "formaldehyde_risk_hint": "未能从图像中识别到可用OCR文本，因此房间质量启发式无法做有效判断（仅供参考）。"
+            },
+            "ocr": { "status": "unavailable", "text": "" }
+          },
+          "schema": {
+            "p_image": {
+              "type": "object",
+              "required": ["label", "prob"],
+              "properties": {
+                "label": { "type": "string", "enum": ["伪造", "真实"] },
+                "prob": { "type": "number", "description": "置信度百分制(0-100, float)" }
+              }
+            },
+            "ai_generated": {
+              "type": "object",
+              "required": ["status"],
+              "properties": {
+                "status": { "type": "string", "enum": ["available", "unavailable"] },
+                "label": {
+                  "type": "string",
+                  "enum": ["AI生成", "非AI生成"],
+                  "optionalWhen": "status=unavailable"
+                },
+                "prob": {
+                  "type": "number",
+                  "description": "置信度百分制(0-100, float)",
+                  "optionalWhen": "status=unavailable"
+                }
+              }
+            },
+            "piracy": {
+              "type": "object",
+              "required": ["status", "is_infringing", "match_count", "top_results"],
+              "properties": {
+                "status": { "type": "string", "enum": ["available", "unavailable"] },
+                "is_infringing": { "type": "boolean" },
+                "match_count": { "type": "integer", "minimum": 0 },
+                "top_results": { "type": "array", "items": { "type": "object" }, "description": "当前阶段占位，通常为空数组" }
+              }
+            },
+            "room_quality": {
+              "type": "object",
+              "required": ["tier", "scores", "cheap_decor_risk", "formaldehyde_risk_hint"],
+              "properties": {
+                "tier": { "type": "string", "enum": ["high", "medium", "low"] },
+                "scores": {
+                  "type": "object",
+                  "required": ["overall", "decor", "safety"],
+                  "properties": {
+                    "overall": { "type": "integer", "minimum": 0, "maximum": 100 },
+                    "decor": { "type": "integer", "minimum": 0, "maximum": 100 },
+                    "safety": { "type": "integer", "minimum": 0, "maximum": 100 }
+                  }
+                },
+                "cheap_decor_risk": { "type": "string", "enum": ["low", "medium", "high"] },
+                "formaldehyde_risk_hint": { "type": "string", "description": "基于OCR/线索的可解释提示（启发式，仅供参考）" }
+              }
+            },
+            "ocr": {
+              "type": "object",
+              "required": ["status", "text"],
+              "properties": {
+                "status": { "type": "string", "enum": ["available", "unavailable"] },
+                "text": { "type": "string" },
+                "words": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "optionalWhen": "status=unavailable"
+                }
+              }
+            }
+          }
+        },
+        "error": {
+          "httpStatus": 400,
+          "bodyExample": { "error": "未选择文件" },
+          "errors": [
+            { "code": 400, "message": "未选择文件" },
+            { "code": 400, "message": "不支持的文件类型，请上传JPG、JPEG或PNG格式的图像" }
+          ]
+        }
+      },
+      "notes": [
+        "ai_generated 只有在加载多任务模型时才可能返回 available，否则 status=unavailable。",
+        "piracy 当前为相似度启发式占位；当缺少 imagehash 依赖或参考库时会返回 status=unavailable。",
+        "room_quality 为启发式输出，不阻塞主流程；当 OCR 不可用时会输出明确提示语句。"
+      ]
+    },
+    {
+      "name": "Legacy Predict (Compatibility)",
+      "method": "POST",
+      "path": "/api/predict",
+      "contentType": "multipart/form-data",
+      "request": {
+        "formFields": [
+          {
+            "name": "file",
+            "type": "file",
+            "required": true,
+            "allowedExtensions": ["jpg", "jpeg", "png"]
+          }
+        ]
+      },
+      "response": {
+        "success": {
+          "httpStatus": 200,
+          "bodyExample": {
+            "class": "真实",
+            "fake_prob": 24.78,
+            "real_prob": 75.22,
+            "image_path": "uploads/real_0001.jpg",
+            "furniture": [],
+            "ocr_text": "",
+            "similarity_score": 0.0,
+            "plagiarism_suspicion": "低"
+          }
+        },
+        "error": {
+          "httpStatus": 400,
+          "bodyExample": { "error": "不支持的文件类型，请上传JPG、JPEG或PNG格式的图像" }
+        }
+      },
+      "notes": [
+        "这是旧接口，为保持兼容性保留；推荐新接入使用 /api/analyze。"
+      ]
+    }
+  ]
+}
+

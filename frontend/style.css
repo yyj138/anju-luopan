@@ -1,0 +1,376 @@
+/* --- 全局样式重置 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* --- 通用组件 --- */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+/* --- 导航栏 --- */
+.navbar {
+    background-color: var(--accent);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: opacity 0.3s;
+}
+
+.navbar .nav-links a:hover {
+    opacity: 0.8;
+}
+
+/* --- 🔥 房源卡片 - 核心样式 --- */
+.house-card {
+    background-color: var(--bg-primary);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+    margin-bottom: 20px;
+    overflow: visible;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    padding: 25px;
+    position: relative;
+    cursor: pointer;
+    min-height: 280px;
+    max-width: 100%;
+}
+
+.house-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.25);
+}
+
+/* 🔥 右上角收藏按钮 - 绝对定位，不在flex流中 */
+.house-card .favorite-btn {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    padding: 10px 25px !important;
+    border-radius: 12px !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid var(--border-color) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.3s !important;
+    z-index: 10 !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+    width: auto !important;
+    flex: none !important;
+    flex-basis: auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    min-width: auto !important;
+    max-width: none !important;
+}
+
+.house-card .favorite-btn:hover {
+    background-color: #fff;
+    border-color: var(--accent);
+    transform: scale(1.02);
+}
+
+.house-card .favorite-btn i {
+    font-size: 18px;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.house-card .favorite-btn.active i {
+    color: #f44336;
+}
+
+/* 🔥 左侧图片容器 */
+.house-card .house-image {
+    flex: 0 0 220px !important;
+    height: 230px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    background-color: var(--border-color) !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    flex-basis: 220px !important;
+}
+
+.house-card .house-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s;
+}
+
+.house-card:hover .house-image img {
+    transform: scale(1.05);
+}
+
+.house-card .image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--border-color);
+}
+
+.house-card .image-placeholder i {
+    font-size: 60px;
+    color: var(--accent);
+}
+
+/* 🔥 右侧信息容器 */
+.house-card .house-info {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    min-width: 0 !important;
+    padding-right: 150px !important;
+    flex-grow: 1 !important;
+    flex-shrink: 1 !important;
+    flex-basis: auto !important;
+}
+
+/* 🔥 标题 - 自动换行，不碰到收藏按钮 */
+.house-card .house-title {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    line-height: 1.4 !important;
+    margin-bottom: 12px !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* 🔥 地址+地铁信息 */
+.house-card .house-address {
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.house-card .house-address .address-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.house-card .house-address i {
+    color: var(--accent);
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* 🔥 面积/户型/楼层 信息标签 */
+.house-card .house-details {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.house-card .house-details .detail-item {
+    background-color: var(--border-color);
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 15px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.house-card .house-details .detail-item i {
+    font-size: 18px;
+    color: var(--accent);
+}
+
+/* 🔥 底部：标签+价格 对齐 */
+.house-card .house-bottom {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    margin-top: auto !important;
+    gap: 20px !important;
+}
+
+/* 标签组 */
+.house-card .house-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.house-card .house-tags .tag {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* 🔥 右下角价格 - 与标签底部对齐 */
+.house-card .house-price {
+    font-size: 36px !important;
+    font-weight: bold !important;
+    color: var(--accent) !important;
+    line-height: 1 !important;
+    text-align: right !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+}
+
+/* --- 房源列表布局 --- */
+.houses-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.houses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* --- 分页控件 --- */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    clear: both;
+}
+
+.pagination .page-btn {
+    padding: 8px 16px;
+    margin: 0 10px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination .page-btn:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+}
+
+.pagination .page-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination .page-info {
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+/* --- 响应式适配 --- */
+@media (max-width: 768px) {
+    .houses-list,
+    .houses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .house-card {
+        flex-direction: column;
+        min-height: auto;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .house-card .house-image {
+        flex: 0 0 100%;
+        height: 200px;
+    }
+    
+    .house-card .house-info {
+        padding-right: 0;
+    }
+    
+    .house-card .favorite-btn {
+        top: 15px;
+        right: 15px;
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+    
+    .house-card .house-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .house-card .house-price {
+        align-self: flex-end;
+        font-size: 30px;
+    }
+}

@@ -1,0 +1,19 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://8.134.109.200:5432/anjv
+    username: team_user
+    password: #your_password_here
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+    # 示例配置（可能需要根据实际配置调整）
+gis:
+  service:
+    url: http://8.134.109.200:8080
